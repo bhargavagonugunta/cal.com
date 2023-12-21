@@ -192,12 +192,21 @@ export default function MemberListItem(props: Props) {
                   StartIcon={Clock}
                 />
               </Tooltip> */}
-              <Tooltip content={t("view_public_page")}>
+              <Tooltip
+                content={
+                  props.member.accepted ? t("view_public_page") : t("team_view_user_availability_disabled")
+                }>
                 <Button
                   target="_blank"
                   href={`${bookerUrl}/${props.member.username}`}
                   color="secondary"
-                  className={classNames(!editMode ? "rounded-r-md" : "")}
+                  className={classNames(
+                    !editMode
+                      ? "rounded-r-md"
+                      : props.member.accepted
+                      ? ""
+                      : "bg-neutral-600 hover:bg-neutral-600"
+                  )}
                   variant="icon"
                   StartIcon={ExternalLink}
                   disabled={!props.member.accepted}
